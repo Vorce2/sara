@@ -1,599 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Sara</title>
-    <style>
-        @font-face {
-            font-family: 'Segoe Script';
-            src: url('segoescript.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Georgia', serif;
-            overflow-x: hidden;
-        }
-
-        .page {
-            position: relative;
-            width: 100vw;
-            min-height: 100vh;
-        }
-
-        #page1, #page2 {
-            overflow: hidden;
-        }
-
-        /* Page 1 Styles */
-        #page1 {
-            height: 100vh;
-            background: linear-gradient(to bottom, #ffc8dd, #ffafcc, #bde0fe);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #page1 h1 {
-            font-size: 3rem;
-            color: #fff;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-            margin-bottom: 2rem;
-            z-index: 10;
-            text-align: center;
-            padding: 0 2rem;
-            font-family: 'Segoe Script', cursive;
-        }
-
-        #page1 button {
-            padding: 1rem 3rem;
-            font-size: 1.2rem;
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 10;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        #page1 button:hover {
-            transform: scale(1.05);
-            background: #fff;
-        }
-
-        .petal {
-            position: absolute;
-            top: -20px;
-            width: 15px;
-            height: 15px;
-            background: radial-gradient(circle, #ffb3d9 0%, #ff80bf 100%);
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(calc(100vh + 20px)) rotate(360deg);
-            }
-        }
-
-        /* Page 2 Styles */
-        #page2 {
-            display: none;
-            background: linear-gradient(to bottom, #1a1a3e, #0f0f23);
-            overflow-y: auto;
-        }
-
-        #page2 .poem-container {
-            max-width: 800px;
-            margin: 5rem auto;
-            padding: 2rem;
-            z-index: 10;
-            position: relative;
-        }
-
-        #page2 button {
-            margin: 1rem;
-            padding: 1rem 3rem;
-            font-size: 1.2rem;
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 10;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            position: relative;
-        }
-
-        #page2 button:hover {
-            transform: scale(1.05);
-            background: #fff;
-        }
-
-        #page2 .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 3rem auto;
-            position: relative;
-            z-index: 10;
-        }
-
-        #page2 h2 {
-            font-size: 3rem;
-            color: white;
-            text-align: center;
-            margin-bottom: 3rem;
-            font-family: 'Segoe Script', cursive;
-        }
-
-        #page2 .poem-line {
-            font-size: 1.5rem;
-            margin: 1rem 0;
-            line-height: 2;
-            font-family: 'Segoe Script', cursive;
-            background: linear-gradient(to right, grey 0%, white 50%, grey 100%);
-            background-size: 200% 100%;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        #page2 .poem-line:nth-child(odd) {
-            animation: pulseOdd 4s linear infinite;
-        }
-
-        #page2 .poem-line:nth-child(even) {
-            animation: pulseEven 4s linear infinite;
-        }
-
-        @keyframes pulseOdd {
-            0% {
-                background-position: 100% 0;
-            }
-            100% {
-                background-position: -100% 0;
-            }
-        }
-
-        @keyframes pulseEven {
-            0% {
-                background-position: 50% 0;
-            }
-            100% {
-                background-position: -150% 0;
-            }
-        }
-
-        .snowflake {
-            position: absolute;
-            top: -20px;
-            color: white;
-            font-size: 1.5rem;
-            opacity: 0.8;
-            animation: snowfall linear infinite;
-            z-index: 5;
-        }
-
-        @keyframes snowfall {
-            to {
-                transform: translateY(calc(100vh + 20px));
-            }
-        }
-
-        @media (max-width: 768px) {
-            #page1 h1 {
-                font-size: 2rem;
-            }
-            #page2 .poem-line {
-                font-size: 1.2rem;
-            }
-            #page3 .letter-container {
-                font-size: 1rem;
-                padding: 1.5rem;
-            }
-            #page4 .gallery-container {
-                padding: 1.5rem;
-            }
-        }
-
-        /* Page 4 Styles */
-        #page4 {
-            display: none;
-            background: linear-gradient(135deg, #ffedcc 0%, #ffd89b 25%, #ffb88c 50%, #ff9a76 75%, #ffa07a 100%);
-            background-size: 400% 400%;
-            animation: warmGradient 15s ease infinite;
-            overflow-y: auto;
-            padding: 3rem 0;
-        }
-
-        @keyframes warmGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        #page4 h2 {
-            font-size: 3rem;
-            color: #fff;
-            text-align: center;
-            margin: 2rem 0 3rem 0;
-            font-family: 'Segoe Script', cursive;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-        }
-
-        #page4 .gallery-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: flex;
-            flex-direction: row;
-            gap: 2rem;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        #page4 .image-frame {
-            background: rgba(255, 255, 255, 0.95);
-            border: 5px solid rgba(255, 255, 255, 0.8);
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            flex: 1;
-            min-width: 300px;
-            max-width: 500px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        #page4 .image-frame:hover {
-            transform: scale(1.05);
-        }
-
-        #page4 .image-frame img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            display: block;
-        }
-
-        /* Lightbox Styles */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .lightbox.active {
-            display: flex;
-        }
-
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            border-radius: 10px;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            font-size: 3rem;
-            color: white;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.2);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s;
-        }
-
-        .lightbox-close:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-
-        #page4 .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 3rem auto;
-            position: relative;
-            z-index: 10;
-        }
-
-        #page4 button {
-            margin: 1rem;
-            padding: 1rem 3rem;
-            font-size: 1.2rem;
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 10;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-
-        #page4 button:hover {
-            transform: scale(1.05);
-            background: #fff;
-        }
-
-        /* Page 5 Styles */
-        #page5 {
-            display: none;
-            background: linear-gradient(to bottom, #0a0e27 0%, #1a1d3a 30%, #2d3561 60%, #1a1d3a 100%);
-            overflow-y: auto;
-            padding: 3rem 0;
-            position: relative;
-        }
-
-        #page5::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, white, transparent),
-                radial-gradient(2px 2px at 60px 70px, white, transparent),
-                radial-gradient(1px 1px at 50px 50px, white, transparent),
-                radial-gradient(1px 1px at 130px 80px, white, transparent),
-                radial-gradient(2px 2px at 90px 10px, white, transparent);
-            background-size: 200px 200px;
-            animation: twinkle 3s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        #page5 .page5-container {
-            max-width: 900px;
-            margin: 3rem auto;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-            position: relative;
-        }
-
-        #page5 .image-frame-page5 {
-            background: rgba(255, 255, 255, 0.1);
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            max-width: 600px;
-            cursor: pointer;
-            transition: transform 0.3s;
-            backdrop-filter: blur(10px);
-        }
-
-        #page5 .love-text {
-            font-family: 'Segoe Script', cursive;
-            font-size: 2rem;
-            color: white;
-            text-align: center;
-            margin-top: 2rem;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 182, 193, 0.3);
-        }
-
-        #page5 .image-frame-page5:hover {
-            transform: scale(1.05);
-        }
-
-        #page5 .image-frame-page5 img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            display: block;
-        }
-
-        #page5 .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 3rem auto;
-            position: relative;
-            z-index: 10;
-        }
-
-        #page5 button {
-            margin: 1rem;
-            padding: 1rem 3rem;
-            font-size: 1.2rem;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 10;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-            color: white;
-            backdrop-filter: blur(10px);
-        }
-
-        #page5 button:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        #page3 .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 3rem auto;
-            padding-bottom: 2rem;
-            position: relative;
-            z-index: 10;
-        }
-
-        #page3 button {
-            margin: 1rem;
-            padding: 1rem 3rem;
-            font-size: 1.2rem;
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid #ff6b9d;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 10;
-            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
-            position: relative;
-        }
-
-        #page3 button:hover {
-            transform: scale(1.05);
-            background: #fff;
-        }
-
-        /* Page 3 Styles */
-        #page3 {
-            display: none;
-            background: linear-gradient(135deg, #ff6b9d 0%, #ffa5ba 25%, #ff85a1 50%, #ffc0cb 75%, #ff6b9d 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            overflow-y: auto;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        #page3 .letter-container {
-            max-width: 900px;
-            margin: 3rem auto;
-            padding: 3rem;
-            background: rgba(255, 240, 245, 0.95);
-            border: 3px solid #ff6b9d;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(255, 107, 157, 0.4);
-            z-index: 10;
-            position: relative;
-            font-family: 'Segoe Script', cursive;
-            font-size: 1.2rem;
-            line-height: 2;
-            color: #8b0040;
-            white-space: pre-wrap;
-        }
-
-        .strawberry {
-            position: absolute;
-            top: -20px;
-            font-size: 2rem;
-            animation: float linear infinite;
-            z-index: 5;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-            }
-            100% {
-                transform: translateY(calc(100vh + 20px)) rotate(360deg);
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>For Sara</title>
+<style>
+@font-face{font-family:'Segoe Script';src:url('segoescript.woff2') format('woff2');font-weight:normal;font-style:normal}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Georgia',serif;overflow-x:hidden}
+.page{position:relative;width:100vw;min-height:100vh}
+#page1,#page2{overflow:hidden}
+#page1{height:100vh;background:linear-gradient(to bottom,#ffc8dd,#ffafcc,#bde0fe);display:flex;flex-direction:column;justify-content:center;align-items:center}
+#page1 h1{font-size:3rem;color:#fff;text-shadow:2px 2px 8px rgba(0,0,0,0.3);margin-bottom:2rem;z-index:10;text-align:center;padding:0 2rem;font-family:'Segoe Script',cursive}
+#page1 button{padding:1rem 3rem;font-size:1.2rem;background:rgba(255,255,255,0.9);border:none;border-radius:50px;cursor:pointer;transition:all 0.3s;z-index:10;box-shadow:0 4px 15px rgba(0,0,0,0.2)}
+#page1 button:hover{transform:scale(1.05);background:#fff}
+.petal{position:absolute;top:-20px;width:15px;height:15px;background:radial-gradient(circle,#ffb3d9 0%,#ff80bf 100%);border-radius:50%;opacity:0.8;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(calc(100vh + 20px)) rotate(360deg)}}
+#page2{display:none;background:linear-gradient(to bottom,#1a1a3e,#0f0f23);overflow-y:auto}
+#page2 .poem-container{max-width:800px;margin:5rem auto;padding:2rem;z-index:10;position:relative}
+#page2 button{margin:1rem;padding:1rem 3rem;font-size:1.2rem;background:rgba(255,255,255,0.9);border:none;border-radius:50px;cursor:pointer;transition:all 0.3s;z-index:10;box-shadow:0 4px 15px rgba(0,0,0,0.2);position:relative}
+#page2 button:hover{transform:scale(1.05);background:#fff}
+#page2 .button-container{display:flex;justify-content:center;gap:2rem;margin:3rem auto;position:relative;z-index:10}
+#page2 h2{font-size:3rem;color:white;text-align:center;margin-bottom:3rem;font-family:'Segoe Script',cursive}
+#page2 .poem-line{font-size:1.5rem;margin:1rem 0;line-height:2;font-family:'Segoe Script',cursive;background:linear-gradient(to right,grey 0%,white 50%,grey 100%);background-size:200% 100%;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+#page2 .poem-line:nth-child(odd){animation:pulseOdd 4s linear infinite}
+#page2 .poem-line:nth-child(even){animation:pulseEven 4s linear infinite}
+@keyframes pulseOdd{0%{background-position:100% 0}100%{background-position:-100% 0}}
+@keyframes pulseEven{0%{background-position:50% 0}100%{background-position:-150% 0}}
+.snowflake{position:absolute;top:-20px;color:white;font-size:1.5rem;opacity:0.8;animation:snowfall linear infinite;z-index:5}
+@keyframes snowfall{to{transform:translateY(calc(100vh + 20px))}}
+#page3{display:none;background:linear-gradient(135deg,#ff6b9d 0%,#ffa5ba 25%,#ff85a1 50%,#ffc0cb 75%,#ff6b9d 100%);background-size:400% 400%;animation:gradientShift 15s ease infinite;overflow-y:auto}
+@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+#page3 .letter-container{max-width:900px;margin:3rem auto;padding:3rem;background:rgba(255,240,245,0.95);border:3px solid #ff6b9d;border-radius:15px;box-shadow:0 10px 40px rgba(255,107,157,0.4);z-index:10;position:relative;font-family:'Segoe Script',cursive;font-size:1.2rem;line-height:2;color:#8b0040;white-space:pre-wrap}
+#page3 .button-container{display:flex;justify-content:center;gap:2rem;margin:3rem auto;padding-bottom:2rem;position:relative;z-index:10}
+#page3 button{margin:1rem;padding:1rem 3rem;font-size:1.2rem;background:rgba(255,255,255,0.9);border:2px solid #ff6b9d;border-radius:50px;cursor:pointer;transition:all 0.3s;z-index:10;box-shadow:0 4px 15px rgba(255,107,157,0.3);position:relative}
+#page3 button:hover{transform:scale(1.05);background:#fff}
+.strawberry{position:absolute;top:-20px;font-size:2rem;animation:float linear infinite;z-index:5}
+@keyframes float{0%{transform:translateY(0) rotate(0deg)}100%{transform:translateY(calc(100vh + 20px)) rotate(360deg)}}
+#page4{display:none;background:linear-gradient(135deg,#ffedcc 0%,#ffd89b 25%,#ffb88c 50%,#ff9a76 75%,#ffa07a 100%);background-size:400% 400%;animation:warmGradient 15s ease infinite;overflow-y:auto;padding:3rem 0}
+@keyframes warmGradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+#page4 h2{font-size:3rem;color:#fff;text-align:center;margin:2rem 0 3rem 0;font-family:'Segoe Script',cursive;text-shadow:2px 2px 8px rgba(0,0,0,0.3)}
+#page4 .gallery-container{max-width:1200px;margin:0 auto;padding:2rem;display:flex;flex-direction:row;gap:2rem;align-items:center;justify-content:center;flex-wrap:wrap}
+#page4 .image-frame{background:rgba(255,255,255,0.95);border:5px solid rgba(255,255,255,0.8);border-radius:15px;padding:1.5rem;box-shadow:0 10px 30px rgba(0,0,0,0.3);flex:1;min-width:300px;max-width:500px;cursor:pointer;transition:transform 0.3s}
+#page4 .image-frame:hover{transform:scale(1.05)}
+#page4 .image-frame img{width:100%;height:auto;border-radius:10px;display:block}
+#page4 .button-container{display:flex;justify-content:center;gap:2rem;margin:3rem auto;position:relative;z-index:10}
+#page4 button{margin:1rem;padding:1rem 3rem;font-size:1.2rem;background:rgba(255,255,255,0.9);border:2px solid rgba(255,255,255,0.8);border-radius:50px;cursor:pointer;transition:all 0.3s;z-index:10;box-shadow:0 4px 15px rgba(0,0,0,0.3);position:relative}
+#page4 button:hover{transform:scale(1.05);background:#fff}
+#page5{display:none;background:linear-gradient(to bottom,#0a0e27 0%,#1a1d3a 30%,#2d3561 60%,#1a1d3a 100%);overflow-y:auto;padding:3rem 0;position:relative}
+#page5::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(2px 2px at 20px 30px,white,transparent),radial-gradient(2px 2px at 60px 70px,white,transparent),radial-gradient(1px 1px at 50px 50px,white,transparent),radial-gradient(1px 1px at 130px 80px,white,transparent),radial-gradient(2px 2px at 90px 10px,white,transparent);background-size:200px 200px;animation:twinkle 3s ease-in-out infinite;pointer-events:none;z-index:1}
+@keyframes twinkle{0%,100%{opacity:0.5}50%{opacity:1}}
+#page5 .page5-container{max-width:900px;margin:3rem auto;padding:2rem;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:10;position:relative}
+#page5 .image-frame-page5{background:rgba(255,255,255,0.1);border:3px solid rgba(255,255,255,0.3);border-radius:15px;padding:1.5rem;box-shadow:0 10px 40px rgba(0,0,0,0.5);max-width:600px;cursor:pointer;transition:transform 0.3s;backdrop-filter:blur(10px)}
+#page5 .love-text{font-family:'Segoe Script',cursive;font-size:2rem;color:white;text-align:center;margin-top:2rem;text-shadow:0 0 10px rgba(255,255,255,0.5),0 0 20px rgba(255,182,193,0.3)}
+#page5 .image-frame-page5:hover{transform:scale(1.05)}
+#page5 .image-frame-page5 img{width:100%;height:auto;border-radius:10px;display:block}
+#page5 .button-container{display:flex;justify-content:center;gap:2rem;margin:3rem auto;position:relative;z-index:10}
+#page5 button{margin:1rem;padding:1rem 3rem;font-size:1.2rem;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.5);border-radius:50px;cursor:pointer;transition:all 0.3s;z-index:10;box-shadow:0 4px 15px rgba(0,0,0,0.3);position:relative;color:white;backdrop-filter:blur(10px)}
+#page5 button:hover{transform:scale(1.05);background:rgba(255,255,255,0.3)}
+#page6{display:none;background:linear-gradient(to bottom,#0a0520,#1a1040,#2d1b69);overflow:hidden;position:relative;height:100vh}
+#page6 .page6-container{display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;z-index:10;position:relative}
+#page6 .newyear-text{font-family:'Segoe Script',cursive;font-size:3rem;color:#ffd700;text-align:center;padding:0 2rem;text-shadow:0 0 20px rgba(255,215,0,0.8),0 0 40px rgba(255,215,0,0.5);line-height:1.8}
+#page6 .button-container{position:absolute;bottom:3rem;display:flex;justify-content:center;gap:2rem;z-index:10}
+#page6 button{padding:1rem 3rem;font-size:1.2rem;background:rgba(255,255,255,0.2);border:2px solid rgba(255,215,0,0.5);border-radius:50px;cursor:pointer;transition:all 0.3s;box-shadow:0 4px 15px rgba(255,215,0,0.3);color:#ffd700;backdrop-filter:blur(10px)}
+#page6 button:hover{transform:scale(1.05);background:rgba(255,255,255,0.3)}
+.firework{position:absolute;width:5px;height:5px;border-radius:50%;animation:explode 1s ease-out forwards}
+@keyframes explode{0%{transform:translate(0,0);opacity:1}100%{transform:translate(var(--tx),var(--ty));opacity:0}}
+.lightbox{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.95);z-index:1000;justify-content:center;align-items:center}
+.lightbox.active{display:flex}
+.lightbox img{max-width:90%;max-height:90%;object-fit:contain;border-radius:10px}
+.lightbox-close{position:absolute;top:2rem;left:2rem;font-size:3rem;color:white;cursor:pointer;background:rgba(255,255,255,0.2);width:60px;height:60px;border-radius:50%;display:flex;justify-content:center;align-items:center;transition:all 0.3s}
+.lightbox-close:hover{background:rgba(255,255,255,0.3);transform:scale(1.1)}
+@media (max-width:768px){
+#page1 h1{font-size:2rem}
+#page2 .poem-line{font-size:1.2rem}
+#page3 .letter-container{font-size:1rem;padding:1.5rem}
+#page4 .gallery-container{padding:1.5rem}
+}
+</style>
 </head>
 <body>
-    <!-- Page 1 -->
-    <div id="page1">
-        <h1>For the love of my life, Sara</h1>
-        <button id="nextBtn">Next</button>
-    </div>
-
-    <!-- Page 2 -->
-    <div id="page2">
-        <div class="poem-container">
-            <h2>Poem</h2>
-            <div class="poem-line">The night we confessed our love</div>
-            <div class="poem-line">it was a night like none I had</div>
-            <div class="poem-line"></div>
-            <div class="poem-line">the smiles were uncountable</div>
-            <div class="poem-line">I forgot that I was ever sad</div>
-            <div class="poem-line"></div>
-            <div class="poem-line">your presence itself is a gift</div>
-            <div class="poem-line">a gift whose weight worth in gold</div>
-            <div class="poem-line"></div>
-            <div class="poem-line">your love felt ever so ecstatic</div>
-            <div class="poem-line">like a warm blanket in freezing cold</div>
-            <div class="poem-line"></div>
-            <div class="poem-line">You shine ever so radiant</div>
-            <div class="poem-line">putting the sun's shine to shame</div>
-            <div class="poem-line"></div>
-            <div class="poem-line">many names will come in life and go</div>
-            <div class="poem-line">what is cemented in my heart is your name</div>
-            <div class="poem-line"></div>
-            <div class="poem-line">everywhere I look I see you</div>
-            <div class="poem-line">In my eyes you left a mark</div>
-            <div class="poem-line"></div>
-            <div class="poem-line">the sight of you is dazzling</div>
-            <div class="poem-line">You are my light in the dark</div>
-            <div class="poem-line"></div>
-            <div class="poem-line">we didn't fall in love</div>
-            <div class="poem-line">just for us to move on</div>
-            <div class="poem-line"></div>
-            <div class="poem-line">finding each other was the hardest thing</div>
-            <div class="poem-line">so let's not let it go to waste</div>
-            <div class="poem-line"></div>
-            <div class="poem-line">I'll always love you so dearly</div>
-            <div class="poem-line">Regardless of what we have faced</div>
-            <div class="poem-line"></div>
-            <div class="poem-line">believe the stars in the sky have a place for us</div>
-            <div class="poem-line">I hope we'll hold each other's hand in a new dawn</div>
-            <div class="poem-line"></div>
-            <div class="poem-line">whatever may entail</div>
-            <div class="poem-line">I hope u a great life</div>
-            <div class="poem-line"></div>
-            <div class="poem-line">alone or together, I'll always be by your side</div>
-            <div class="poem-line">if it's for the best, I hope you'll end up my wife</div>
-            <div class="button-container">
-                <button id="backBtn1">Back</button>
-                <button id="nextBtn2">Next</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Page 3 -->
-    <div id="page3">
-        <div class="letter-container">                  A letter to my beloved
-            
+<div id="page1">
+<h1>For the love of my life, Sara</h1>
+<button id="nextBtn">Next</button>
+</div>
+<div id="page2">
+<div class="poem-container">
+<h2>Poem</h2>
+<div class="poem-line">The night we confessed our love</div>
+<div class="poem-line">it was a night like none I had</div>
+<div class="poem-line"></div>
+<div class="poem-line">the smiles were uncountable</div>
+<div class="poem-line">I forgot that I was ever sad</div>
+<div class="poem-line"></div>
+<div class="poem-line">your presence itself is a gift</div>
+<div class="poem-line">a gift whose weight worth in gold</div>
+<div class="poem-line"></div>
+<div class="poem-line">your love felt ever so ecstatic</div>
+<div class="poem-line">like a warm blanket in freezing cold</div>
+<div class="poem-line"></div>
+<div class="poem-line">You shine ever so radiant</div>
+<div class="poem-line">putting the sun's shine to shame</div>
+<div class="poem-line"></div>
+<div class="poem-line">many names will come in life and go</div>
+<div class="poem-line">what is cemented in my heart is your name</div>
+<div class="poem-line"></div>
+<div class="poem-line">everywhere I look I see you</div>
+<div class="poem-line">In my eyes you left a mark</div>
+<div class="poem-line"></div>
+<div class="poem-line">the sight of you is dazzling</div>
+<div class="poem-line">You are my light in the dark</div>
+<div class="poem-line"></div>
+<div class="poem-line">we didn't fall in love</div>
+<div class="poem-line">just for us to move on</div>
+<div class="poem-line"></div>
+<div class="poem-line">finding each other was the hardest thing</div>
+<div class="poem-line">so let's not let it go to waste</div>
+<div class="poem-line"></div>
+<div class="poem-line">I'll always love you so dearly</div>
+<div class="poem-line">Regardless of what we have faced</div>
+<div class="poem-line"></div>
+<div class="poem-line">believe the stars in the sky have a place for us</div>
+<div class="poem-line">I hope we'll hold each other's hand in a new dawn</div>
+<div class="poem-line"></div>
+<div class="poem-line">whatever may entail</div>
+<div class="poem-line">I hope u a great life</div>
+<div class="poem-line"></div>
+<div class="poem-line">alone or together, I'll always be by your side</div>
+<div class="poem-line">if it's for the best, I hope you'll end up my wife</div>
+<div class="button-container">
+<button id="backBtn1">Back</button>
+<button id="nextBtn2">Next</button>
+</div>
+</div>
+</div>
+<div id="page3">
+<div class="letter-container">                    A letter to my beloved
 My dear Sara,
                     I hope this letter finds you in good health. I also hope everyone in your home is doing well. 
 I hope you have been enjoying your holidays so far, and hopefully the rest of them will go well. 
@@ -609,187 +151,80 @@ relationship slowly and properly, of course leaving it up to you. I've prayed so
 Freedom is the greatest form of love that I can offer to you.
 Yours truly,
 Saad.</div>
-        <div class="button-container">
-            <button id="backBtn2">Back</button>
-            <button id="nextBtn3">Next</button>
-        </div>
-    </div>
-
-    <!-- Page 4 -->
-    <div id="page4">
-        <h2>Here is something special for you</h2>
-        <div class="gallery-container">
-            <div class="image-frame">
-                <img src="image1.jpg" alt="Special moment 1" id="img1">
-            </div>
-            <div class="image-frame">
-                <img src="image2.jpg" alt="Special moment 2" id="img2">
-            </div>
-        </div>
-        <div class="button-container">
-            <button id="backBtn3">Back</button>
-            <button id="nextBtn4">Next</button>
-        </div>
-    </div>
-
-    <!-- Page 5 -->
-    <div id="page5">
-        <div class="page5-container">
-            <div class="image-frame-page5">
-                <img src="image3.jpg" alt="Special moment" id="img3">
-            </div>
-            <p class="love-text">I love you, princess<3</p>
-        </div>
-        <div class="button-container">
-            <button id="backBtn4">Back</button>
-        </div>
-    </div>
-
-    <!-- Lightbox for full image view -->
-    <div class="lightbox" id="lightbox">
-        <div class="lightbox-close" id="closeLightbox">←</div>
-        <img src="" alt="Full size image" id="lightboxImg">
-    </div>
-
-    <audio id="bgMusic" loop>
-        <source src="song.mp3" type="audio/mpeg">
-    </audio>
-
-    <script>
-        // Create cherry blossoms
-        function createPetals() {
-            const page1 = document.getElementById('page1');
-            for (let i = 0; i < 30; i++) {
-                const petal = document.createElement('div');
-                petal.classList.add('petal');
-                petal.style.left = Math.random() * 100 + '%';
-                petal.style.animationDuration = (Math.random() * 3 + 5) + 's';
-                petal.style.animationDelay = Math.random() * 5 + 's';
-                page1.appendChild(petal);
-            }
-        }
-
-        // Create snowflakes
-        function createSnowflakes() {
-            const page2 = document.getElementById('page2');
-            for (let i = 0; i < 50; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.classList.add('snowflake');
-                snowflake.textContent = '❄';
-                snowflake.style.left = Math.random() * 100 + '%';
-                snowflake.style.animationDuration = (Math.random() * 3 + 5) + 's';
-                snowflake.style.animationDelay = Math.random() * 5 + 's';
-                snowflake.style.fontSize = (Math.random() * 1 + 0.5) + 'rem';
-                page2.appendChild(snowflake);
-            }
-        }
-
-        // Create strawberries
-        function createStrawberries() {
-            const page3 = document.getElementById('page3');
-            for (let i = 0; i < 30; i++) {
-                const strawberry = document.createElement('div');
-                strawberry.classList.add('strawberry');
-                strawberry.textContent = '🍓';
-                strawberry.style.left = Math.random() * 100 + '%';
-                strawberry.style.animationDuration = (Math.random() * 4 + 6) + 's';
-                strawberry.style.animationDelay = Math.random() * 5 + 's';
-                strawberry.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
-                page3.appendChild(strawberry);
-            }
-        }
-
-        // Next button functionality
-        document.getElementById('nextBtn').addEventListener('click', function() {
-            document.getElementById('page1').style.display = 'none';
-            document.getElementById('page2').style.display = 'block';
-            
-            // Play music
-            const audio = document.getElementById('bgMusic');
-            audio.play().catch(e => console.log('Audio autoplay prevented:', e));
-        });
-
-        // Next button 2 functionality
-        document.getElementById('nextBtn2').addEventListener('click', function() {
-            document.getElementById('page2').style.display = 'none';
-            document.getElementById('page3').style.display = 'block';
-        });
-
-        // Back button 1 functionality
-        document.getElementById('backBtn1').addEventListener('click', function() {
-            document.getElementById('page2').style.display = 'none';
-            document.getElementById('page1').style.display = 'flex';
-        });
-
-        // Back button 2 functionality
-        document.getElementById('backBtn2').addEventListener('click', function() {
-            document.getElementById('page3').style.display = 'none';
-            document.getElementById('page2').style.display = 'block';
-        });
-
-        // Next button 3 functionality
-        document.getElementById('nextBtn3').addEventListener('click', function() {
-            document.getElementById('page3').style.display = 'none';
-            document.getElementById('page4').style.display = 'block';
-        });
-
-        // Back button 3 functionality
-        document.getElementById('backBtn3').addEventListener('click', function() {
-            document.getElementById('page4').style.display = 'none';
-            document.getElementById('page3').style.display = 'block';
-        });
-
-        // Next button 4 functionality
-        document.getElementById('nextBtn4').addEventListener('click', function() {
-            document.getElementById('page4').style.display = 'none';
-            document.getElementById('page5').style.display = 'block';
-        });
-
-        // Back button 4 functionality
-        document.getElementById('backBtn4').addEventListener('click', function() {
-            document.getElementById('page5').style.display = 'none';
-            document.getElementById('page4').style.display = 'block';
-        });
-
-        // Initialize animations
-        createPetals();
-        createSnowflakes();
-        createStrawberries();
-
-        // Lightbox functionality
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        const closeLightbox = document.getElementById('closeLightbox');
-
-        // Add click listeners to both images
-        document.getElementById('img1').addEventListener('click', function() {
-            lightboxImg.src = this.src;
-            lightbox.classList.add('active');
-        });
-
-        document.getElementById('img2').addEventListener('click', function() {
-            lightboxImg.src = this.src;
-            lightbox.classList.add('active');
-        });
-
-        document.getElementById('img3').addEventListener('click', function() {
-            lightboxImg.src = this.src;
-            lightbox.classList.add('active');
-        });
-
-        // Close lightbox when clicking the close button
-        closeLightbox.addEventListener('click', function() {
-            lightbox.classList.remove('active');
-        });
-
-        // Close lightbox when clicking outside the image
-        lightbox.addEventListener('click', function(e) {
-            if (e.target === lightbox) {
-                lightbox.classList.remove('active');
-            }
-        });
-    </script>
+<div class="button-container">
+<button id="backBtn2">Back</button>
+<button id="nextBtn3">Next</button>
+</div>
+</div>
+<div id="page4">
+<h2>Here is something special for you</h2>
+<div class="gallery-container">
+<div class="image-frame">
+<img src="image1.jpg" alt="Special moment 1" id="img1">
+</div>
+<div class="image-frame">
+<img src="image2.jpg" alt="Special moment 2" id="img2">
+</div>
+</div>
+<div class="button-container">
+<button id="backBtn3">Back</button>
+<button id="nextBtn4">Next</button>
+</div>
+</div>
+<div id="page5">
+<div class="page5-container">
+<div class="image-frame-page5">
+<img src="image3.jpg" alt="Special moment" id="img3">
+</div>
+<p class="love-text">I love you, princess<3</p>
+</div>
+<div class="button-container">
+<button id="backBtn4">Back</button>
+<button id="nextBtn5">Next</button>
+</div>
+</div>
+<div id="page6">
+<div class="page6-container">
+<div class="newyear-text">Happy new year.<br>My star, may u shine the brightest</div>
+</div>
+<div class="button-container">
+<button id="backBtn5">Back</button>
+</div>
+</div>
+<div class="lightbox" id="lightbox">
+<div class="lightbox-close" id="closeLightbox">←</div>
+<img src="" alt="Full size image" id="lightboxImg">
+</div>
+<audio id="bgMusic" loop>
+<source src="song.mp3" type="audio/mpeg">
+</audio>
+<script>
+function createPetals(){const p=document.getElementById('page1');for(let i=0;i<30;i++){const e=document.createElement('div');e.classList.add('petal');e.style.left=Math.random()*100+'%';e.style.animationDuration=(Math.random()*3+5)+'s';e.style.animationDelay=Math.random()*5+'s';p.appendChild(e)}}
+function createSnowflakes(){const p=document.getElementById('page2');for(let i=0;i<50;i++){const s=document.createElement('div');s.classList.add('snowflake');s.textContent='❄';s.style.left=Math.random()*100+'%';s.style.animationDuration=(Math.random()*3+5)+'s';s.style.animationDelay=Math.random()*5+'s';s.style.fontSize=(Math.random()*1+0.5)+'rem';p.appendChild(s)}}
+function createStrawberries(){const p=document.getElementById('page3');for(let i=0;i<30;i++){const s=document.createElement('div');s.classList.add('strawberry');s.textContent='🍓';s.style.left=Math.random()*100+'%';s.style.animationDuration=(Math.random()*4+6)+'s';s.style.animationDelay=Math.random()*5+'s';s.style.fontSize=(Math.random()*1.5+1)+'rem';p.appendChild(s)}}
+document.getElementById('nextBtn').addEventListener('click',function(){document.getElementById('page1').style.display='none';document.getElementById('page2').style.display='block';const a=document.getElementById('bgMusic');a.play().catch(e=>console.log('Audio autoplay prevented:',e))});
+document.getElementById('nextBtn2').addEventListener('click',function(){document.getElementById('page2').style.display='none';document.getElementById('page3').style.display='block'});
+document.getElementById('backBtn1').addEventListener('click',function(){document.getElementById('page2').style.display='none';document.getElementById('page1').style.display='flex'});
+document.getElementById('backBtn2').addEventListener('click',function(){document.getElementById('page3').style.display='none';document.getElementById('page2').style.display='block'});
+document.getElementById('nextBtn3').addEventListener('click',function(){document.getElementById('page3').style.display='none';document.getElementById('page4').style.display='block'});
+document.getElementById('backBtn3').addEventListener('click',function(){document.getElementById('page4').style.display='none';document.getElementById('page3').style.display='block'});
+document.getElementById('nextBtn4').addEventListener('click',function(){document.getElementById('page4').style.display='none';document.getElementById('page5').style.display='block'});
+document.getElementById('backBtn4').addEventListener('click',function(){document.getElementById('page5').style.display='none';document.getElementById('page4').style.display='block'});
+document.getElementById('nextBtn5').addEventListener('click',function(){document.getElementById('page5').style.display='none';document.getElementById('page6').style.display='block';startFireworks()});
+document.getElementById('backBtn5').addEventListener('click',function(){document.getElementById('page6').style.display='none';document.getElementById('page5').style.display='block';stopFireworks()});
+function createFirework(){const colors=['#ff0000','#00ff00','#0000ff','#ffff00','#ff00ff','#00ffff','#ffd700','#ff69b4'];const x=Math.random()*window.innerWidth;const y=Math.random()*window.innerHeight*0.6;const color=colors[Math.floor(Math.random()*colors.length)];for(let i=0;i<30;i++){const particle=document.createElement('div');particle.classList.add('firework');particle.style.left=x+'px';particle.style.top=y+'px';particle.style.background=color;const angle=Math.random()*Math.PI*2;const velocity=Math.random()*100+50;const tx=Math.cos(angle)*velocity;const ty=Math.sin(angle)*velocity;particle.style.setProperty('--tx',tx+'px');particle.style.setProperty('--ty',ty+'px');document.getElementById('page6').appendChild(particle);setTimeout(()=>particle.remove(),1000)}}
+let fireworkInterval;
+function startFireworks(){fireworkInterval=setInterval(createFirework,300)}
+function stopFireworks(){clearInterval(fireworkInterval)}
+createPetals();createSnowflakes();createStrawberries();
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightboxImg');
+const closeLightbox=document.getElementById('closeLightbox');
+document.getElementById('img1').addEventListener('click',function(){lightboxImg.src=this.src;lightbox.classList.add('active')});
+document.getElementById('img2').addEventListener('click',function(){lightboxImg.src=this.src;lightbox.classList.add('active')});
+document.getElementById('img3').addEventListener('click',function(){lightboxImg.src=this.src;lightbox.classList.add('active')});
+closeLightbox.addEventListener('click',function(){lightbox.classList.remove('active')});
+lightbox.addEventListener('click',function(e){if(e.target===lightbox){lightbox.classList.remove('active')}});
+</script>
 </body>
 </html>
-
-
